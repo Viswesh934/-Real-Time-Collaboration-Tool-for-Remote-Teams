@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import { CardContainer } from "../Homepage/AllProjects"; // Assuming CardContainer is exported from AllProjects
 import NavigationBar from "../Homepage/Navigationbar";
 
@@ -10,12 +11,13 @@ import NavigationBar from "../Homepage/Navigationbar";
 function ProjectsList() {
   const [projects, setProjects] = useState([]);
   const [groupedProjects, setGroupedProjects] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
 
-        const response = await axios.get("http://localhost:3000/everyproject");
+        const response = await axios.get(`${import.meta.env.VITE_APP_URL}everyproject`);
         setProjects(response.data);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -31,7 +33,7 @@ function ProjectsList() {
       for (const project of projects) {
         const organizationId = project.organizationId;
         const info = await axios.get(
-          `http://localhost:3000/org/getorganizationinfo/${organizationId}`
+          `${import.meta.env.VITE_APP_URL}org/getorganizationinfo/${organizationId}`
         );
         if (!groupedProjects[organizationId]) {
           groupedProjects[organizationId] = {

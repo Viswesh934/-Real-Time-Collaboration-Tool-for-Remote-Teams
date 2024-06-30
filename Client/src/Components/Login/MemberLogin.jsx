@@ -19,14 +19,14 @@ const MemberLogin = () => {
   };
   async function fetchUserId() {
     try {
-      const response = await axios.get("http://localhost:3000/userId", {
+      const response = await axios.get(`${import.meta.env.VITE_APP_URL}userId`, {
         withCredentials: true // Send cookies with the request
       });
       console.log("User ID:", response.data.userId);
       setUserId(response.data.userId);
 
       // Establish socket connection after setting userId
-      const newSocket = io("http://localhost:3000", {
+      const newSocket = io(`${import.meta.env.VITE_APP_URL}`, {
         transports: ["websocket", "polling", "flashsocket"],
         auth: {
           userId: response.data.userId
@@ -50,7 +50,7 @@ const MemberLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/mem/login', formData);
+      const response = await axios.post(`${import.meta.env.VITE_APP_URL}mem/login`, formData);
       fetchUserId();
       console.log(response.data);
       if (response.status === 200) {

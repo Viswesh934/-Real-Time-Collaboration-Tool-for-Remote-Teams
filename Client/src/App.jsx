@@ -11,6 +11,8 @@ import ProjectsList from './Components/Projects/ProjectsList';
 import ChatPage from './Components/ChatApp/ChatPage';
 import Dashboard from './Components/Dashboard';
 import ProjectIdeasList from './Components/ProjectIdeas/ProjectIdeasList';
+import Conf from './Components/Videochat/Conf';
+import Room from './Components/Videochat/Room';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/projectideas" element={<ProjectIdeasList />} />
         <Route path="/chat" element={<ChatPage />}/>
         <Route path="/message-app/:organizationId" element={<MessageApp />} />
+        <Route path="/video-chat/" element={<Conf />} />
+        <Route path='/room/:roomId' element={<Room />} />
       </Routes>
     </div>
   );
